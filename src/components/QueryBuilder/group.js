@@ -4,7 +4,7 @@ import SubGroup from './sub-group';
 class Group extends React.PureComponent {
 
     constructor(props) {
-        super(props);
+        super(props);        
     }
 
     render() {
@@ -12,7 +12,7 @@ class Group extends React.PureComponent {
         return (            
                 <fieldset>
                     <legend>Group:</legend>
-                    <SubGroup></SubGroup>
+                    <SubGroup options={this.props.options}></SubGroup>
                 </fieldset>            
         );
 

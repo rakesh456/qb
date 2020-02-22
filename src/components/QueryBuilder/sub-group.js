@@ -5,6 +5,12 @@ import FieldDropdown from "./fields-dropdown";
 
 class SubGroup extends React.PureComponent {
 
+    constructor(props) {
+        super(props);
+        const options = this.props.options;
+        this.state = { options: options, conditions:[this.renderQueryRow(),this.renderQueryRow()],group: [this.renderGroup()]};
+    }
+
     addCondition = () => {
         console.log("add condition");
         this.setState(state => ({
@@ -14,12 +20,16 @@ class SubGroup extends React.PureComponent {
           ]
         }))
       }
+
+      renderGroup = () => {}
+
       addGroup = () => {
           return(
         <div>
             <SubGroup></SubGroup>
         </div>)
       }
+
       renderQueryRow = () => {
         return (
             <div className="VS-Query-Row">
