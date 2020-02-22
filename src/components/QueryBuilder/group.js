@@ -7,15 +7,13 @@ class Group extends React.PureComponent {
         super(props);        
     }
 
-    render() {
-        const { fields } = this.props.options;
+    render() {        
         return (            
                 <fieldset>
                     <legend>Group:</legend>
                     <SubGroup options={this.props.options}></SubGroup>
                 </fieldset>            
         );
-
     }
 }
 

@@ -4,16 +4,11 @@ import OperationDropdown from "./operation-dropdown";
 import FieldDropdown from "./fields-dropdown";
 
 class SubGroup extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        const options = this.props.options;
-        this.state = { options: options, conditions:[this.renderQueryRow(),this.renderQueryRow()]};
-    }
 
     constructor(props) {
         super(props);
         const options = this.props.options;
-        this.state = { options: options, conditions:[this.renderQueryRow(),this.renderQueryRow()],group: [this.renderGroup()]};
+        this.state = { options: options, conditions:[this.renderQueryRow(), this.renderQueryRow()], subGroups: []};
     }
 
     addCondition = () => {
@@ -26,12 +21,21 @@ class SubGroup extends React.PureComponent {
         }))
       }
 
+    addSubGroup = () => {
+        this.setState(state => ({
+            subGroups: [
+                ...state.subGroups,
+                this.renderSubGroup()
+            ]
+        }))
+    }
+
       renderGroup = () => {}
 
-      addGroup = () => {
+      renderSubGroup = () => {
           return(
         <div>
-            <SubGroup></SubGroup>
+            <SubGroup options={this.props.options}></SubGroup>
         </div>)
       }
 
@@ -46,8 +50,8 @@ class SubGroup extends React.PureComponent {
                     placeholder=""
                 />
             </div>
-        )
-    }
+            )
+        }
 
     // render() {
     //     const { options } = this.props;
@@ -72,10 +76,12 @@ class SubGroup extends React.PureComponent {
                 <div style={{border:'1px solid black'}}>
                     <OperatorDropdown></OperatorDropdown>
                     <button onClick = {this.addCondition} >Add condition</button>
-                    <button onClick={this.addGroup}>Add Sub Group</button>
+                    <button onClick={this.addSubGroup}>Add Sub Group</button>
                     {
-                        //this.renderQueryRow()
                         this.state.conditions
+                    }
+                    {
+                        this.state.subGroups
                     }
                 </div>
         )

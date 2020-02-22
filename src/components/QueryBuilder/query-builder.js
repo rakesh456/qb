@@ -75,15 +75,15 @@ class QueryBuilder extends React.PureComponent {
         )
     }
 
-    addCondition = () => {
-        console.log("add condition");
-        this.setState(state => ({
-          conditions : [
-            ...state.conditions,
-            this.renderQueryRow()
-          ]
-        }))
-      }
+    // addCondition = () => {
+    //     console.log("add condition");
+    //     this.setState(state => ({
+    //       conditions : [
+    //         ...state.conditions,
+    //         this.renderQueryRow()
+    //       ]
+    //     }))
+    //   }
       addGroup = () => {
         console.log("add group");
         return(
