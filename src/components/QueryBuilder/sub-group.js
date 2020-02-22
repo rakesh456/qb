@@ -34,21 +34,35 @@ class SubGroup extends React.PureComponent {
         )
     }
 
+    // render() {
+    //     const { options } = this.props;
+    //     console.log("Entered into the sub group");
+    //     return (
+    //         <div >
+    //       <fieldset>
+    //           <OperatorDropdown></OperatorDropdown>
+    //           <button onClick = {this.addCondition}>Add condition</button>
+    //           <button onClick={this.addGroup}>Add Group</button>
+    //           {
+    //               this.renderQueryRow()
+    //               //this.state.conditions
+    //           }
+    //       </fieldset>
+    //   </div>
+    //     )
+    // }
+
     render() {
-        const { options } = this.props;
-        console.log("Entered into the sub group");
         return (
-            <div >
-          <fieldset>
-              <OperatorDropdown></OperatorDropdown>
-              <button onClick = {this.addCondition}>Add condition</button>
-              <button onClick={this.addGroup}>Add Group</button>
-              {
-                  this.renderQueryRow()
-                  //this.state.conditions
-              }
-          </fieldset>
-      </div>
+                <div style={{border:'1px solid black'}}>
+                    <OperatorDropdown></OperatorDropdown>
+                    <button onClick = {this.addCondition} >Add condition</button>
+                    <button onClick={this.addGroup}>Add Sub Group</button>
+                    {
+                        //this.renderQueryRow()
+                        this.state.conditions
+                    }
+                </div>
         )
     }
 

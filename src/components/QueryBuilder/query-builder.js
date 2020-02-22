@@ -1,4 +1,5 @@
 import React from "react";
+import Group from "./group"
 import OperatorDropdown from "./operator-dropdown";
 import OperationDropdown from "./operation-dropdown";
 import FieldDropdown from "./fields-dropdown";
@@ -103,18 +104,7 @@ class QueryBuilder extends React.PureComponent {
         const { fields } = this.props.options;
         return (
             <div>
-                <fieldset>
-                    <legend>Group:</legend>
-                    <div style={{border:'1px solid black'}}>
-                    <OperatorDropdown></OperatorDropdown>
-                    <button onClick = {this.addCondition} >Add condition</button>
-                    <button onClick={this.addGroup}>Add Sub Group</button>
-                    {
-                        //this.renderQueryRow()
-                        this.state.conditions
-                    }
-                    </div>
-                </fieldset>
+                <Group options={this.props.options}></Group>
             </div>
         );
 

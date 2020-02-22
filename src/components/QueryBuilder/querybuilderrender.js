@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import QueryBuilder from "./index";
+import QueryBuilder from "./query-builder";
 import {
     isUndefinedOrNull
 } from "../../utils/utils";
