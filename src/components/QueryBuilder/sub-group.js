@@ -4,6 +4,11 @@ import OperationDropdown from "./operation-dropdown";
 import FieldDropdown from "./fields-dropdown";
 
 class SubGroup extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        const options = this.props.options;
+        this.state = { options: options, conditions:[this.renderQueryRow(),this.renderQueryRow()]};
+    }
 
     addCondition = () => {
         console.log("add condition");
