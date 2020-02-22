@@ -2,6 +2,7 @@ import React from "react";
 import OperatorDropdown from "./operator-dropdown";
 import OperationDropdown from "./operation-dropdown";
 import FieldDropdown from "./fields-dropdown";
+import SubGroup from "./sub-group";
 import * as CONSTANTS from '../../utils/constants'
 import {
     isUndefinedOrNull
@@ -12,8 +13,13 @@ class QueryBuilder extends React.PureComponent {
     constructor(props) {
         super(props);
         const options = this.props.options;
-        this.state = { options: options };
+        this.state = { options: options, conditions:[this.renderQueryRow(),this.renderQueryRow()],group: [this.renderGroup()]};
     }
+
+    // newCondition(){
+    //     this.groups = [this.renderGroup()]
+    //     conditions = [this.renderQueryRow(),this.renderQueryRow()]
+    // }
 
     // Component lifecycle methods started
     componentDidMount() {
@@ -40,6 +46,58 @@ class QueryBuilder extends React.PureComponent {
             </div>
         )
     }
+    
+    renderGroup=()=>{
+        return(
+    //       <div >
+    //       <fieldset>
+    //           <OperatorDropdown></OperatorDropdown>
+    //           <button onClick = {this.addCondition}>Add condition</button>
+    //           <button onClick={this.addGroup}>Add Group</button>
+    //           {
+    //               this.renderQueryRow()
+    //               //this.state.conditions
+    //           }
+    //           {
+    //               this.renderQueryRow()
+    //               //this.state.conditions
+    //           }
+    //           {
+    //               this.renderQueryRow()
+    //               //this.state.conditions
+    //           }
+    //       </fieldset>
+    //   </div>
+    <div>
+        <SubGroup></SubGroup>
+    </div>
+        )
+    }
+
+    addCondition = () => {
+        console.log("add condition");
+        this.setState(state => ({
+          conditions : [
+            ...state.conditions,
+            this.renderQueryRow()
+          ]
+        }))
+      }
+      addGroup = () => {
+        console.log("add group");
+        return(
+            <div className="VS-Query-Row">
+                <SubGroup></SubGroup>
+            </div>
+        )
+        // console.log("add group");
+        // this.setState(state => ({
+        //   conditions : [
+        //     ...state.conditions,
+        //     this.renderGroup()
+        //   ]
+        // }))
+      }
 
     render() {
         const { fields } = this.props.options;
@@ -47,13 +105,19 @@ class QueryBuilder extends React.PureComponent {
             <div>
                 <fieldset>
                     <legend>Group:</legend>
+                    <div style={{border:'1px solid black'}}>
                     <OperatorDropdown></OperatorDropdown>
+                    <button onClick = {this.addCondition} >Add condition</button>
+                    <button onClick={this.addGroup}>Add Sub Group</button>
                     {
-                        this.renderQueryRow()
+                        //this.renderQueryRow()
+                        this.state.conditions
                     }
+                    </div>
                 </fieldset>
             </div>
         );
+
     }
     // Component render methods end
 }
