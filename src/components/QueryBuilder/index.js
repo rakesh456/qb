@@ -99,21 +99,27 @@ class QueryBuilder extends React.PureComponent {
         // }))
       }
 
+      closeGroup=()=>{
+          console.log("Close group");
+          
+      }
+
     render() {
         const { fields } = this.props.options;
         return (
             <div>
                 <fieldset>
                     <legend>Group:</legend>
-                    <div style={{border:'1px solid black'}}>
+                    {/* <div style={{border:'1px solid black'}}>
                     <OperatorDropdown></OperatorDropdown>
                     <button onClick = {this.addCondition} >Add condition</button>
-                    <button onClick={this.addGroup}>Add Sub Group</button>
+                   <button onClick={this.addGroup}>Add Sub Group</button> 
                     {
                         //this.renderQueryRow()
                         this.state.conditions
                     }
-                    </div>
+                    </div>  */}
+                    <SubGroup/>
                 </fieldset>
             </div>
         );

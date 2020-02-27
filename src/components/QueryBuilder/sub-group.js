@@ -2,15 +2,25 @@ import React from "react";
 import OperatorDropdown from "./operation-dropdown";
 import OperationDropdown from "./operation-dropdown";
 import FieldDropdown from "./fields-dropdown";
+import QueryBuilder from "./index"
 
 class SubGroup extends React.PureComponent {
+    indx = -1;
 
     constructor(props) {
         super(props);
         const options = this.props.options;
-        this.state = { options: options, conditions:[this.renderQueryRow(), this.renderQueryRow()], subGroups: []};
+        this.closeCondition = this.closeCondition.bind(this);
+        this.state = { options: options, conditions:[], subGroups: []};
     }
-
+    componentDidMount(){
+        var condition = [];
+        condition.push({id:1});
+        condition.push({id:2})
+        this.setState({
+            conditions:condition
+        })
+    }
     addCondition = () => {
         console.log("add condition");
         this.setState(state => ({
@@ -30,18 +40,43 @@ class SubGroup extends React.PureComponent {
         }))
     }
 
-      renderGroup = () => {}
+    closeGroup=(group)=>{
+        console.log("Close group");
+        group = null;
+    }
 
+    closeCondition=(id)=>{
+         console.log("Close condition",id);
+         var newData = this.state.conditions.filter(( obj )=> {
+            return obj.id !== id;
+          });
+          this.setState({
+            conditions:newData
+          })
+    //    // const id = Number(e.currentTarget.id);
+    //     console.log(id, typeof(id));
+    //     this.state.conditions.splice(id,1);
+    //     console.log(this.state.conditions)
+    //     this.indx = this.indx-1;
+    }
+
+      renderGroup = (element) => {
+          return(this.renderQueryRow(element.id))
+      }
       renderSubGroup = () => {
+          console.log(this.props.options);
           return(
-        <div>
+        <div style={{marginLeft:'50px'}}>
             <SubGroup options={this.props.options}></SubGroup>
+            
         </div>)
       }
 
-      renderQueryRow = () => {
+      renderQueryRow = (id) => {
+
+        this.indx = this.indx+1;
         return (
-            <div className="VS-Query-Row">
+            <div key={this.indx} className="VS-Query-Row">
                 <FieldDropdown options={this.props.options}></FieldDropdown>
                 <OperationDropdown></OperationDropdown>
                 <input type="text"
@@ -49,6 +84,7 @@ class SubGroup extends React.PureComponent {
                     className=""
                     placeholder=""
                 />
+                <button id={id} onClick={this.closeCondition(id)}>Close</button>
             </div>
             )
         }
@@ -72,13 +108,17 @@ class SubGroup extends React.PureComponent {
     // }
 
     render() {
+        console.log(this.state.conditions);
         return (
                 <div style={{border:'1px solid black'}}>
                     <OperatorDropdown></OperatorDropdown>
                     <button onClick = {this.addCondition} >Add condition</button>
                     <button onClick={this.addSubGroup}>Add Sub Group</button>
+                    <button onClick={() => this.closeGroup(this)}>Close</button>
                     {
-                        this.state.conditions
+                        this.state.conditions.map((element,index)=>
+                            this.renderGroup(element)
+                        )
                     }
                     {
                         this.state.subGroups
