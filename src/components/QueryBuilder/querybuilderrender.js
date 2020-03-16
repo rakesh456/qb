@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import QueryBuilder from "./query-builder";
+import QueryBuilder from "./index";
 import {
     isUndefinedOrNull
 } from "../../utils/utils";
@@ -11,10 +11,10 @@ function queryBuilderRender(el) {
     el.reload = function () {
     }
 
-    let myComponentElement = <QueryBuilder options={options} />;
+    let qbComponentElement = <QueryBuilder options={options} />;
 
-    let myComponentInstance = ReactDOM.render(
-        myComponentElement,
+    let qbComponentInstance = ReactDOM.render(
+        qbComponentElement,
         el
     )
 }

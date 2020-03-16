@@ -24,7 +24,6 @@ class QueryBuilder extends React.PureComponent {
 
     // Component lifecycle methods started
     componentDidMount() {
-
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -107,7 +106,6 @@ class QueryBuilder extends React.PureComponent {
                 <Group options={this.props.options}></Group>
             </div>
         );
-
     }
     // Component render methods end
 }
